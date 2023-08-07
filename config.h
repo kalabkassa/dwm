@@ -95,8 +95,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
   {     0,                  XF86XK_MonBrightnessUp,     spawn, {.v = brup} },
   {     0,                XF86XK_MonBrightnessDown,     spawn, {.v = brdn} },
-  {     0,                XF86XK_AudioLowerVolume,      spawn, {.v = vup} },
-  {     0,                XF86XK_AudioRaiseVolume,      spawn, {.v = vdn} },
+  {     0,                XF86XK_AudioLowerVolume,      spawn, {.v = vdn} },
+  {     0,                XF86XK_AudioRaiseVolume,      spawn, {.v = vup} },
   {     0,                XF86XK_AudioMute,             spawn, {.v = mute} },
 
 	TAGKEYS(                        XK_1,                      0)
