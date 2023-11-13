@@ -29,7 +29,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	//{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-  { "vivaldi-stable",  NULL,       NULL,       1,       0,           -1 },
+  { "vivaldi",    NULL,       NULL,       1,            0,           -1 },
+  { "terminator", NULL,       NULL,       2,            0,           -1 },
 };
 
 /* layout(s) */
@@ -61,6 +62,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "terminator", NULL };
 static const char *filemanager[] = { "thunar", NULL };
+static const char *browser[] = { "vivaldi", NULL };
 // brightness and volume control
 static const char *brup[] = {"brightnessctl", "s", "100+", NULL};
 static const char *brdn[] = {"brightnessctl", "s", "100-", NULL};
@@ -75,10 +77,10 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,		                    XK_x,      spawn,          {.v = termcmd } },
-  { MODKEY,                       XK_e,      spawn,          SHCMD("thunar") },
+  { MODKEY,                       XK_e,      spawn,          {.v = filemanager} },
   { MODKEY,                       XK_s,      spawn,          SHCMD("spotify") },
   { MODKEY,                       XK_v,      spawn,          SHCMD("vlc") },
-  { MODKEY,                       XK_b,      spawn,          SHCMD("opera")  },
+  { MODKEY,                       XK_b,      spawn,          {.v = browser} },
   { MODKEY,                       XK_o,      spawn,          SHCMD("okular") },
   { MODKEY,                       XK_t,      spawn,          SHCMD("telegram") },
 	{ MODKEY,                       XK_h,      togglebar,      {0} }, 
