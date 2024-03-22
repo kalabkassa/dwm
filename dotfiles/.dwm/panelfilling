@@ -1,0 +1,45 @@
+# Replace with the MAC address of your Bluetooth device
+device="24:81:C7:F8:61:72"
+
+# Function to check if device is connected
+check_connected() {
+  local connected=$(bluetoothctl info $device_mac | grep "Connected: yes")
+  [ -n "$connected" ]
+}
+
+# Function to check if device is paired
+check_paired() {
+  local paired=$(bluetoothctl info $device_mac | grep "Paired: yes")
+  [ -n "$paired" ]
+}
+
+while true; do
+	xsetroot -name "$(pamixer --get-volume-human)$(echo " | ")$(upower -i /org/freedesktop/UPower/devices/headset_dev_24_81_C7_F8_61_72 | sed -n -e 2p -e 10p | tr -s ' ' | sed 's/^[^):]*[):]//' | xargs )$(echo " | ")$(cat /sys/class/power_supply/BAT0/capacity)$(echo " % | ")$(free -m  | grep ^Mem | tr -s ' ' | cut -d ' ' -f 3)$(echo " MB | ")$(date +%A" "%d" "%B" "%H:%M)$(echo " | wifi: ")$(iwgetid wlan0 -r)"
+	sleep 1;
+
+  battery_status=$(acpi -b | sed -n 's/.*: \(.*\), [0-9]*%,.*/\1/p')
+  battery_level=$(acpi -b | sed -n 's/.* \([0-9]*\)%,.*/\1/p')
+
+  if [ "$battery_status" == "Discharging" ]; then
+    if [ "$battery_level" -lt 25 ]; then
+      notify-send "Battery Looooooooooooooooooooow"
+    fi
+  fi
+
+
+  if check_connected; then
+    echo "Device is already connected."
+  else
+    /usr/bin/expect <(
+      cat <<EOF
+    set timeout 5
+    spawn bluetoothctl
+    send -- "connect $device\r"
+    expect "Connection successful"
+    send -- "exit\r"
+    expect eof
+EOF
+)
+  fi
+done
+fi
