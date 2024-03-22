@@ -29,8 +29,10 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	//{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-  { "vivaldi",    NULL,       NULL,       1,            0,           -1 },
-  { "terminator", NULL,       NULL,       2,            0,           -1 },
+  { "Vivaldi-stable",    NULL,       NULL,       1<<0,  0,                   -1 },
+  { "Terminator",        NULL,       NULL,       1<<1,  0,                   -1 },
+  { "TelegramDesktop",   NULL,       NULL,       1<<2,  0,                   -1 },
+  { "spotify",        NULL,       NULL,       1<<9,  0,                   -1 },
 };
 
 /* layout(s) */
@@ -76,15 +78,16 @@ static const char *previous[] = {"playerctl", "previous", NULL};
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,		                    XK_x,      spawn,          {.v = termcmd } },
+	{ MODKEY,                    XK_x,      spawn,          {.v = termcmd } },
   { MODKEY,                       XK_e,      spawn,          {.v = filemanager} },
   { MODKEY,                       XK_s,      spawn,          SHCMD("spotify") },
   { MODKEY,                       XK_v,      spawn,          SHCMD("vlc") },
   { MODKEY,                       XK_b,      spawn,          {.v = browser} },
   { MODKEY,                       XK_o,      spawn,          SHCMD("okular") },
-  { MODKEY,                       XK_t,      spawn,          SHCMD("telegram") },
+//   { MODKEY,                       XK_t,      spawn,          SHCMD("telegram") },
+	{ 0,                          0xff61,      spawn,          SHCMD("flameshot launcher") },
 	{ MODKEY,                       XK_h,      togglebar,      {0} }, 
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+	{ Mod1Mask,                       XK_Tab,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
@@ -93,7 +96,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	//{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	//{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{MODKEY,                        XK_f,        togglefullscr,  {0}},
@@ -133,9 +136,10 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
+	//{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+  { ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 2} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
