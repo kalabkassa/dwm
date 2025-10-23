@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/XF86keysym.h>
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -84,9 +84,10 @@ static const Key keys[] = {
   { MODKEY,                       XK_v,      spawn,          SHCMD("vlc") },
   { MODKEY,                       XK_b,      spawn,          {.v = browser} },
   { MODKEY,                       XK_o,      spawn,          SHCMD("okular") },
+    {MODKEY,                      XK_w,      spawn,          SHCMD("~/.dwm/wall.py")},
 //   { MODKEY,                       XK_t,      spawn,          SHCMD("telegram") },
 	{ 0,                          0xff61,      spawn,          SHCMD("flameshot launcher") },
-	{ MODKEY,                       XK_h,      togglebar,      {0} }, 
+	{ MODKEY,                       XK_h,      togglebar,      {0} },
 	{ Mod1Mask,                       XK_Tab,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -116,7 +117,7 @@ static const Key keys[] = {
   {     0,                XF86XK_AudioMute,             spawn, {.v = mute} },
   {     0,                XF86XK_AudioPlay,             spawn, {.v = play_pause} },
   {     0,                XF86XK_AudioNext,             spawn, {.v = next} },
-  {     0,                XF86XK_AudioPrev,             spawn, {.v = previous} }, 
+  {     0,                XF86XK_AudioPrev,             spawn, {.v = previous} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
